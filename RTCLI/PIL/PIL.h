@@ -52,3 +52,8 @@ namespace RTCLI
 	//! @return Returns the size of bytes of the memory block. If `ptr` is `nullptr`, the returned value is 0.
 	RTCLI_PIL_API usize memsize(void* ptr, usize alignment = 0);
 }
+
+namespace RTCLI
+{
+	RTCLI_PIL_API void nop(void) RTCLI_NOEXCEPT;
+}

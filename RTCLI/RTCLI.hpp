@@ -17,6 +17,4 @@ namespace RTCLI
 
     //! Advances the state of RTCLI into next frame.
     RTCLI_API void frame();
-
-    
 }

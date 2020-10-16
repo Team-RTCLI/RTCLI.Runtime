@@ -67,7 +67,7 @@ include_directories(.)
 set(SRC_FILES 
     Base.hpp
     Config.hpp
-    PIL.hpp
+    PIL/PIL.h
     RTCLI.hpp
 
     RTCLI.cpp
