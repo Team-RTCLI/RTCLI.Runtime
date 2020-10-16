@@ -210,6 +210,14 @@
     #define RTCLI_DLL_EXPORT __attribute__ ((visibility("default")))
 #endif
 
+#if defined(RTCLI_COMPILER_MSVC)
+    #define RTCLI_FORCEINLINE forceinline
+#else
+    #define RTCLI_FORCEINLINE inline
+#endif
+// By Default we use cpp-standard above 2011XXL
+#define RTCLI_NOEXCEPT noexcept
+
 #ifdef RTCLI_COMPILER_MSVC
 #define RTCLI_FUNCTION __FUNCTION__
 #endif
