@@ -229,33 +229,36 @@ namespace RTCLI::CIL
     enum class Code : RTCLI::u32 { CODES };
 #undef X
 
-#define X(a, b) #a, 
-    static const RTCLI::vector<RTCLI::string> CodeStrings = { CODES };
-#undef X
+namespace Internal
+{
+    #define X(a, b) #a, 
+        static const RTCLI::vector<RTCLI::string> CodeStrings = { CODES };
+    #undef X
 
-#define X(a, b) {#a, RTCLI::CIL::Code::a}, 
-    static const RTCLI::unordered_map<RTCLI::string, RTCLI::CIL::Code> CodeMap = { CODES };
-#undef X
+    #define X(a, b) {#a, RTCLI::CIL::Code::a}, 
+        static const RTCLI::unordered_map<RTCLI::string, RTCLI::CIL::Code> CodeMap = { CODES };
+    #undef X
+}
 
-    RTCLI_INLINE RTCLI::CIL::Code StringToCode(const RTCLI::string& name) RTCLI_NOEXCEPT
+    RTCLI_INLINE RTCLI::CIL::Code CodeFromString(const RTCLI::string& name) RTCLI_NOEXCEPT
     {
-        if(CodeMap.find(name) == CodeMap.end())
+        if(Internal::CodeMap.find(name) == Internal::CodeMap.end())
         {
             assert(0 && "FATAL_ERROR: No CIL Code with this name!");
             return RTCLI::CIL::Code::Nop;
         }
-        return CodeMap.find(name)->second;
+        return Internal::CodeMap.find(name)->second;
     }
 
     RTCLI_INLINE RTCLI::string_view ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT
     {
         auto index = static_cast<u32>(code);
-        if(index >= CodeStrings.size())
+        if(index >= Internal::CodeStrings.size())
         {
             assert(0 && "FATAL_ERROR: UNKNOWN CIL Code!");
             return "NONE";
         }
-        return CodeStrings[index];
+        return Internal::CodeStrings[index];
     }
 }
 #undef CODES
