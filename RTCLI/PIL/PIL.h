@@ -55,5 +55,59 @@ namespace RTCLI
 
 namespace RTCLI
 {
-	RTCLI_PIL_API void nop(void) RTCLI_NOEXCEPT;
+	//! vm object
+	struct object {};
+
+	//! vm method
+	struct method {};
+
+	//! a frame with parameters / return address / local variables of method-call.
+	struct record_frame {};
+
+	//! frame_stack / call_stack
+	//! a record_frame will be pushed at each method call.
+	//! frame will be poped once the method-call ends.  
+	struct frame_stack 
+	{
+		RTCLI_PIL_API virtual bool enque_frame(record_frame&) RTCLI_NOEXCEPT = 0;
+	};
+
+	struct cli_machine
+	{
+		
+	};
+
+	//! calls a VM method
+	RTCLI_PIL_API object call(cli_machine& vm, object& caller, method& mtd, record_frame& frame) RTCLI_NOEXCEPT;
+
+	RTCLI_PIL_API void nop(cli_machine& vm, frame_stack& stack) RTCLI_NOEXCEPT;
+
+}
+
+namespace RTCLI::DesignCase
+{
+	struct hello_world_stack_frame final : public RTCLI::record_frame
+	{
+		string str;
+	};
+
+	void hello_world_marshal(hello_world_stack_frame& sf)
+	{
+		return hello_world(sf.str);
+	}
+
+	void hello_world(string)
+	{
+
+	}
+
+	// IL:
+	// IL_XXXX: ldstr "hello_world!"
+	// IL_XXXX: stloc.0
+	// IL_XXXX: ldloc.0
+	// IL_XXXX: call hello_world(float, string)
+	// Interpreter =>
+	// string param = vm.ld("hello_world");    // from vm.managed_memory
+	// stack_frame& sf = ld(param);		// load param to stack_frame
+	// call(vm, null, "hello_world", sf);	//
 }
