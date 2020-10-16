@@ -1,7 +1,7 @@
 #pragma once
 #include <Base.hpp>
 
-namespace RTCIL::CIL
+namespace RTCLI::CIL
 {
     enum class StackBehaviour : RTCLI::u32
     {

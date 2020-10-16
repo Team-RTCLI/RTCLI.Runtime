@@ -2,7 +2,7 @@
 #include "StackBehaviour.h"
 #include "Code.h"
 
-namespace RTCIL::CIL
+namespace RTCLI::CIL
 {
     enum class OpCodeType : RTCLI::u32 
     {
