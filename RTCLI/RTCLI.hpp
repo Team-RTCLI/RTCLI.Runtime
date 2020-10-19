@@ -9,7 +9,7 @@
 
 namespace RTCLI
 {
-    //! Initiailizes RTCLI.
+    //! Initializes RTCLI.
     RTCLI_API void init();
 
     //! Closes RTCLI.

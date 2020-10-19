@@ -35,30 +35,8 @@ if(LIB)
     add_definitions("-DRTCLI_BUILD_LIB")
 endif()
 
-# Choose C++ Stds.
 if(NOT "cxx_std_11" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
     message(FATAL_ERROR "C++11 Support is required to compile RTCLI")
-endif()
-
-# Since most compilers supports selection of multiple C++ standards, we always choose the latest standard that the compiler supports manually.
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_definitions("-DRTCLI_MANUAL_CONFIG_CPP_STANDARD")
-
-# Currently there are known issues in VS2019 that C++20 is not fully supported, so use C++17 until they are tested fixed.
-# if("cxx_std_20" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
-#    set(CMAKE_CXX_STANDARD 20)
-#    add_definitions("-DRTCLI_COMPILER_CPP14 -DRTCLI_COMPILER_CPP17 -DRTCLI_COMPILER_CPP20")
-# else
-
-if("cxx_std_17" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
-    set(CMAKE_CXX_STANDARD 17)
-    add_definitions("-DRTCLI_COMPILER_CPP14 -DRTCLI_COMPILER_CPP17")
-elseif("cxx_std_14" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
-    set(CMAKE_CXX_STANDARD 14)
-    add_definitions("-DRTCLI_COMPILER_CPP14")
-else()
-    # CPP11 is always enabled, so there is no need to declare it.
-    set(CMAKE_CXX_STANDARD 11)
 endif()
 
 include_directories(.)
@@ -67,10 +45,10 @@ include_directories(.)
 set(SRC_FILES 
     Base.hpp
     Config.hpp
-    PIL/PIL.h
+    PIL.hpp
     RTCLI.hpp
 
-    RTCLI.cpp
+    Source/RTCLI.cpp
     )
 
 if(LIB)

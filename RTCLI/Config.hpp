@@ -14,7 +14,7 @@
 //#define RTCLI_MANUAL_CONFIG_CPU_ARCHITECTURE
 
 // If you define RTCLI_MANUAL_CONFIG_CPU_ARCHITECTURE, you should manually choose one of the following CPU
-// aichitecture:
+// architecture:
 //#define RTCLI_PLATFORM_X86_64
 //#define RTCLI_PLATFORM_X86
 //#define RTCLI_PLATFORM_ARM64
@@ -95,6 +95,10 @@
     using c16 = USER_SPECIFIC_TYPE;
     using c32 = USER_SPECIFIC_TYPE;
 }*/
+
+// If you want to enable the debug layer of RTCLI, define this macro.
+// The debug layer will produce detailed error and warning informations when some errors occur.
+//#define RTCLI_DEBUG_LAYER
 
 //------------------------- End of User Configuration Section -------------------------
 
@@ -208,19 +212,6 @@
     #define RTCLI_DLL_EXPORT __declspec(dllexport)
 #else
     #define RTCLI_DLL_EXPORT __attribute__ ((visibility("default")))
-#endif
-
-#if defined(RTCLI_COMPILER_MSVC)
-    #define RTCLI_FORCEINLINE forceinline
-#else
-    #define RTCLI_FORCEINLINE inline
-#endif
-#define RTCLI_INLINE inline
-// By Default we use cpp-standard above 2011XXL
-#define RTCLI_NOEXCEPT noexcept
-
-#ifdef RTCLI_COMPILER_MSVC
-#define RTCLI_FUNCTION __FUNCTION__
 #endif
 
 // define RTCLI_BUILD_LIB in module's project config or API's source file, not in public domain.
