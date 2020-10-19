@@ -41,6 +41,12 @@ endif()
 
 include_directories(.)
 
+file(GLOB_RECURSE 
+    source_list 
+    ${CMAKE_SOURCE_DIR}/${RTCLI_IMPL_DIR}/*.cpp
+    ${CMAKE_SOURCE_DIR}/${RTCLI_IMPL_DIR}/*.hpp
+)
+
 # Add Files.
 set(SRC_FILES 
     Base.hpp
@@ -49,7 +55,9 @@ set(SRC_FILES
     RTCLI.hpp
 
     Source/RTCLI.cpp
-    )
+
+    ${source_list}
+)
 
 if(LIB)
     add_library(RTCLI STATIC ${SRC_FILES})
