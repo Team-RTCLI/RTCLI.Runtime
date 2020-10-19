@@ -19,7 +19,7 @@ namespace Internal
 
 namespace RTCLI::CIL
 {
-    DLLEXPORT RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT
+    RTCLI_DLLEXPORT RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT
     {
         if(Internal::CodeMap.find(name) == Internal::CodeMap.end())
         {
@@ -29,7 +29,7 @@ namespace RTCLI::CIL
         return Internal::CodeMap.find(name)->second;
     }
 
-    DLLEXPORT const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT
+    RTCLI_DLLEXPORT const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT
     {
         auto index = static_cast<u32>(code);
         if(index >= Internal::CodeStrings.size())

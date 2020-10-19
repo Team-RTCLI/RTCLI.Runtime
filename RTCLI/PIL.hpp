@@ -2,7 +2,7 @@
 #include "Base.hpp"
 
 #ifndef RTCLI_PIL_API
-#define RTCLI_PIL_API
+#define RTCLI_PIL_API RTCLI_DLLVISIBLE
 #endif
 
 // The Platform Independent Layer.

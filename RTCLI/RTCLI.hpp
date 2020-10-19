@@ -4,7 +4,7 @@
 #include "Base.hpp"
 
 #ifndef RTCLI_API
-#define RTCLI_API
+#define RTCLI_API RTCLI_DLLVISIBLE
 #endif
 
 namespace RTCLI

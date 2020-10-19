@@ -1,22 +1,27 @@
+#define DLL_IMPLEMENTATION
 #include <RTCLI.hpp>
 #include <PIL.hpp>
 #include <iostream>
+#include <memory>
+#include "CoreStub.hpp"
+
+using namespace RTCLI::Stub;
 
 namespace RTCLI
 {
-    void init()
+    RTCLI_DLL_EXPORT void init()
     {
-        std::cout << "RTCLI Core Init!" << std::endl;
+        CoreStub::init();
         return;
     }
 
-    void close()
+    RTCLI_DLL_EXPORT void close()
     {
         std::cout << "RTCLI Core Close!" << std::endl;
         return;
     }
 
-    void frame()
+    RTCLI_DLL_EXPORT void frame()
     {
         std::cout << "RTCLI Step Into NextFrame!" << std::endl;
         return;

@@ -228,6 +228,6 @@ namespace RTCLI::CIL
     enum class Code : RTCLI::u32 { CODES };
 #undef X
 
-    DLLVISIBLE RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT;
-    DLLVISIBLE const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT;
+    RTCLI_DLLVISIBLE RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT;
+    RTCLI_DLLVISIBLE const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT;
 }

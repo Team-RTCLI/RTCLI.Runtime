@@ -266,20 +266,20 @@ namespace RTCLI
 // export attribute for shared_lib
 #ifdef __EMSCRIPTEN__
 #include "emscripten.h"
-#define DLLEXPORT EMSCRIPTEN_KEEPALIVE
-#define DLLVISIBLE EMSCRIPTEN_KEEPALIVE
-#define DLLLOCAL __attribute__((visibility("hidden")))
+#define RTCLI_DLLEXPORT EMSCRIPTEN_KEEPALIVE
+#define RTCLI_DLLVISIBLE EMSCRIPTEN_KEEPALIVE
+#define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
 #define __stdcall 
 #elif defined(__GNUC__)
-#define DLLEXPORT __attribute__((visibility("default")))
-#define DLLVISIBLE __attribute__((visibility("default")))
-#define DLLLOCAL __attribute__((visibility("hidden")))
+#define RTCLI_DLLEXPORT __attribute__((visibility("default")))
+#define RTCLI_DLLVISIBLE __attribute__((visibility("default")))
+#define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
 #define __stdcall 
 #else
-#define DLLEXPORT __declspec(dllexport)
+#define RTCLI_DLLEXPORT __declspec(dllexport)
 #ifdef DLL_IMPLEMENTATION
-#define DLLVISIBLE __declspec(dllexport)
+#define RTCLI_DLLVISIBLE __declspec(dllexport)
 #else
-#define DLLVISIBLE __declspec(dllimport)
+#define RTCLI_DLLVISIBLE __declspec(dllimport)
 #endif
 #endif
