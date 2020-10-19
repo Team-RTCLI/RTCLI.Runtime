@@ -248,3 +248,15 @@ namespace RTCLI
     using c32 = char32_t;
 }
 #endif
+
+
+
+// inline defs
+#if defined(RTCLI_COMPILER_MSVC)
+    #define RTCLI_FORCEINLINE forceinline
+#else
+    #define RTCLI_FORCEINLINE inline
+#endif
+#define RTCLI_INLINE inline
+// By Default we use cpp-standard above 2011XXL
+#define RTCLI_NOEXCEPT noexcept
