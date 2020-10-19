@@ -1,6 +1,5 @@
 #pragma once
-#include <Base.hpp>
-#include <assert.h>
+#include <RTCLI/Base.hpp>
 
 #define CODES \
     X(Nop, 0) \
@@ -229,7 +228,6 @@ namespace RTCLI::CIL
     enum class Code : RTCLI::u32 { CODES };
 #undef X
 
-    RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT;
-
-    const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT;
+    DLLVISIBLE RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT;
+    DLLVISIBLE const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT;
 }

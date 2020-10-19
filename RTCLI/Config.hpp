@@ -260,3 +260,24 @@ namespace RTCLI
 #define RTCLI_INLINE inline
 // By Default we use cpp-standard above 2011XXL
 #define RTCLI_NOEXCEPT noexcept
+
+// export attribute for shared_lib
+#ifdef __EMSCRIPTEN__
+#include "emscripten.h"
+#define DLLEXPORT EMSCRIPTEN_KEEPALIVE
+#define DLLVISIBLE EMSCRIPTEN_KEEPALIVE
+#define DLLLOCAL __attribute__((visibility("hidden")))
+#define __stdcall 
+#elif defined(__GNUC__)
+#define DLLEXPORT __attribute__((visibility("default")))
+#define DLLVISIBLE __attribute__((visibility("default")))
+#define DLLLOCAL __attribute__((visibility("hidden")))
+#define __stdcall 
+#else
+#define DLLEXPORT __declspec(dllexport)
+#ifdef DLL_IMPLEMENTATION
+#define DLLVISIBLE __declspec(dllexport)
+#else
+#define DLLVISIBLE __declspec(dllimport)
+#endif
+#endif

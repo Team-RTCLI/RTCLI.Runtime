@@ -7,4 +7,7 @@ set(RTCLI_IMPL_DIR "RTCLIStub")
 
 project(RTCLI)
 
+include_directories(.)
+
 add_subdirectory(RTCLI)
+add_subdirectory(Test)

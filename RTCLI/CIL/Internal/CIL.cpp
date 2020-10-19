@@ -1,5 +1,7 @@
+#define DLL_IMPLEMENTATION
 #include "Code.h"
 #include <vector>
+#include <assert.h>
 #include <string>
 #include <unordered_map>
 
@@ -16,7 +18,7 @@ namespace Internal
 
 namespace RTCLI::CIL
 {
-    RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT
+    DLLEXPORT RTCLI::CIL::Code CodeFromString(const char* name) RTCLI_NOEXCEPT
     {
         if(Internal::CodeMap.find(name) == Internal::CodeMap.end())
         {
@@ -26,7 +28,7 @@ namespace RTCLI::CIL
         return Internal::CodeMap.find(name)->second;
     }
 
-    const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT
+    DLLEXPORT const char* ToString(const RTCLI::CIL::Code code) RTCLI_NOEXCEPT
     {
         auto index = static_cast<u32>(code);
         if(index >= Internal::CodeStrings.size())
