@@ -1,6 +1,7 @@
 #pragma once
 #include "Internal/StackBehaviour.h"
 #include "Internal/Code.h"
+#include <RTCLI/Base.hpp>
 
 namespace RTCLI::CIL
 {

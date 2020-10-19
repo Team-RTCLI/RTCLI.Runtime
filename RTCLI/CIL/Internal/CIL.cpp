@@ -1,4 +1,5 @@
 #define DLL_IMPLEMENTATION
+
 #include "Code.h"
 #include <vector>
 #include <assert.h>
@@ -39,3 +40,5 @@ namespace RTCLI::CIL
         return Internal::CodeStrings[index].c_str();
     }
 }
+
+#undef DLL_IMPLEMENTATION

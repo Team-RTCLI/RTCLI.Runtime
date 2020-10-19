@@ -252,10 +252,12 @@ namespace RTCLI
 
 
 // inline defs
-#if defined(RTCLI_COMPILER_MSVC)
-    #define RTCLI_FORCEINLINE forceinline
+#ifndef RTCLI_FORCEINLINE
+#ifdef RTCLI_COMPILER_MSVC
+    #define RTCLI_FORCEINLINE __forceinline
 #else
     #define RTCLI_FORCEINLINE inline
+#endif
 #endif
 #define RTCLI_INLINE inline
 // By Default we use cpp-standard above 2011XXL
