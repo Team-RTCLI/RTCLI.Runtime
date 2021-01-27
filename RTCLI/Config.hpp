@@ -249,8 +249,6 @@ namespace RTCLI
 }
 #endif
 
-
-
 // inline defs
 #ifndef RTCLI_FORCEINLINE
 #ifdef RTCLI_COMPILER_MSVC
@@ -282,4 +280,8 @@ namespace RTCLI
 #else
 #define RTCLI_DLLVISIBLE __declspec(dllimport)
 #endif
+#endif
+
+#ifndef RTCLI_API
+#define RTCLI_API RTCLI_DLLVISIBLE
 #endif

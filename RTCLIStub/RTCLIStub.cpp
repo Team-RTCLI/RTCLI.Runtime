@@ -11,20 +11,17 @@ namespace RTCLI
 {
     RTCLI_DLL_EXPORT void init()
     {
-        CoreStub::init();
-        return;
+        return CoreStub::init();
     }
 
     RTCLI_DLL_EXPORT void close()
     {
-        std::cout << "RTCLI Core Close!" << std::endl;
-        return;
+        return CoreStub::close();
     }
 
     RTCLI_DLL_EXPORT void frame()
     {
-        std::cout << "RTCLI Step Into NextFrame!" << std::endl;
-        return;
+        return CoreStub::frame();
     }
 }
 

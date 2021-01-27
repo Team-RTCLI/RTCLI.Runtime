@@ -3,7 +3,6 @@
 
 int main()
 {
-    std::cout << "CILTest" << std::endl;
     std::cout << RTCLI::CIL::ToString(
         RTCLI::CIL::CodeFromString("Nop")
     );

@@ -61,5 +61,12 @@ namespace RTCLI
 		return res < 0;
 	}
 
-
+	struct RTCLI_API uuid
+    {
+		union
+		{
+			char bytes[12];
+		};
+    };
+	static_assert(sizeof(uuid) == sizeof(char) * 12, "uuid size error!");
 }
