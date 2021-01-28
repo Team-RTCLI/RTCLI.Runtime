@@ -1,4 +1,4 @@
-namespace RTCLI::Runtime
+namespace RTCLI::System
 {
     template<typename T>
     Object* new_object()

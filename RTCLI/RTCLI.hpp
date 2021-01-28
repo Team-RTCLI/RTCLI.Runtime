@@ -9,7 +9,7 @@
 
 namespace RTCLI
 {
-    using Object = Runtime::Object;
+    using Object = System::Object;
     
     //! Initializes RTCLI.
     RTCLI_API void init();

@@ -1,7 +1,7 @@
 #pragma once
 #include "RTCLI/Base.hpp"
 
-namespace RTCLI::Runtime
+namespace RTCLI::System
 {
     struct RTCLI_API Object 
     {

@@ -29,17 +29,17 @@ namespace RTCLI
 {
     void* memalloc(usize size, usize alignment)
     {
-        return nullptr;
+        return ::aligned_alloc(size, alignment);
     }
 
     void memfree(void* ptr, usize alignment)
     {
-        return;
+        return ::free(ptr);
     }
 
     void* memrealloc(void* ptr, usize size, usize alignment)
     {
-        return nullptr;
+        return ::realloc(ptr, size);
     }
 
     usize memsize(void* ptr, usize alignment)
