@@ -14,7 +14,7 @@ namespace RTCLI::System
     };
 
     template<typename T>
-    Object* new_object();
+    T* new_object();
 
     RTCLI_API Object* new_object(const Type& objectType);
 }
