@@ -1,7 +1,12 @@
 //! The Native Interface of RTCLI.
 //! You only need to include this file in order to use RTCLI.
 #pragma once
+#include "Runtime/Int.h"
+#include "Runtime/Single.h"
 #include "Runtime/Object.h"
+#include "Runtime/IL.h"
+
+#include "Runtime/Console/WriteLine.h"
 
 #ifndef RTCLI_API
 #define RTCLI_API RTCLI_DLLVISIBLE
@@ -9,6 +14,8 @@
 
 namespace RTCLI
 {
+    using Int32 = System::Int32;
+    using Int64 = System::Int64;
     using Object = System::Object;
     
     //! Initializes RTCLI.

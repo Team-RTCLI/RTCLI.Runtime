@@ -1,17 +1,17 @@
-#include "CoreStub.hpp"
+#include "CoreDefault.hpp"
 #include <iostream>
 
-void RTCLI::Stub::CoreStub::init()
+void RTCLI::Default::CoreDefault::init()
 {
     std::cout << "RTCLI Core Init!" << std::endl;
 }
 
-void RTCLI::Stub::CoreStub::close()
+void RTCLI::Default::CoreDefault::close()
 {
     std::cout << "RTCLI Core Close!" << std::endl;
 }
 
-void RTCLI::Stub::CoreStub::frame()
+void RTCLI::Default::CoreDefault::frame()
 {
     std::cout << "RTCLI Core Frame!" << std::endl;
 }

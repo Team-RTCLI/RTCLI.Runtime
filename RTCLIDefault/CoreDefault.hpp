@@ -2,9 +2,9 @@
 
 namespace RTCLI
 {
-    namespace Stub
+    namespace Default
     {
-        class CoreStub
+        class CoreDefault
         {
         public:
             static void init();

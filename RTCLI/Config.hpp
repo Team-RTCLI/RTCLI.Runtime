@@ -221,40 +221,13 @@
 	#define RTCLI_EXPORT RTCLI_DLL_EXPORT
 #endif
 
-#ifndef RTCLI_CUSTOM_BASE_TYPES
-#include <cstdint>
-#include <cstddef>
-namespace RTCLI
-{
-    using u8 = std::uint8_t;
-    using i8 = std::int8_t;
-    using u16 = std::uint64_t;
-    using i16 = std::int16_t;
-    using u32 = std::uint32_t;
-    using i32 = std::int32_t;
-    using u64 = std::uint64_t;
-    using i64 = std::int64_t;
-    using f32 = float;
-    using f64 = double;
-    using usize = std::size_t;
-    using isize = std::ptrdiff_t;
-#ifdef RTCLI_COMPILER_CPP20
-    using c8 = char8_t;
-#else
-	using c8 = char;
-	static_assert(sizeof(c8) == 1, "Incorrect c8 type size.");
-#endif
-    using c16 = char16_t;
-    using c32 = char32_t;
-}
-#endif
 
 // inline defs
 #ifndef RTCLI_FORCEINLINE
 #ifdef RTCLI_COMPILER_MSVC
-    #define RTCLI_FORCEINLINE __forceinline
+#define RTCLI_FORCEINLINE __forceinline
 #else
-    #define RTCLI_FORCEINLINE inline
+#define RTCLI_FORCEINLINE inline
 #endif
 #endif
 #define RTCLI_INLINE inline
@@ -284,4 +257,48 @@ namespace RTCLI
 
 #ifndef RTCLI_API
 #define RTCLI_API RTCLI_DLLVISIBLE
+#endif
+
+#ifndef RTCLI_IL_FUNC
+#define RTCLI_IL_FUNC RTCLI_FORCEINLINE
+#endif
+
+#ifndef RTCLI_CUSTOM_BASE_TYPES
+#include <cstdint>
+#include <cstddef>
+namespace RTCLI
+{
+    using u8 = std::uint8_t;
+    using i8 = std::int8_t;
+    using u16 = std::uint64_t;
+    using i16 = std::int16_t;
+    using u32 = std::uint32_t;
+    using i32 = std::int32_t;
+    using u64 = std::uint64_t;
+    using i64 = std::int64_t;
+    using f32 = float;
+    using f64 = double;
+    using usize = std::size_t;
+    using isize = std::ptrdiff_t;
+    using Void = void;
+#ifdef RTCLI_COMPILER_CPP20
+    using c8 = char8_t;
+#else
+	using c8 = char;
+	static_assert(sizeof(c8) == 1, "Incorrect c8 type size.");
+#endif
+    using c16 = char16_t;
+    using c32 = char32_t;
+
+    template<typename T, typename V>
+    RTCLI_FORCEINLINE T StaticCast(V&& v)
+    {
+        return static_cast<T>(std::forward<V>(v));
+    }
+
+    namespace System
+    {
+        using Void = RTCLI::Void;
+    }
+}
 #endif

@@ -3,25 +3,25 @@
 #include <PIL.hpp>
 #include <iostream>
 #include <memory>
-#include "CoreStub.hpp"
+#include "CoreDefault.hpp"
 
-using namespace RTCLI::Stub;
+using namespace RTCLI::Default;
 
 namespace RTCLI
 {
     RTCLI_DLL_EXPORT void init()
     {
-        return CoreStub::init();
+        return CoreDefault::init();
     }
 
     RTCLI_DLL_EXPORT void close()
     {
-        return CoreStub::close();
+        return CoreDefault::close();
     }
 
     RTCLI_DLL_EXPORT void frame()
     {
-        return CoreStub::frame();
+        return CoreDefault::frame();
     }
 }
 
@@ -29,7 +29,11 @@ namespace RTCLI
 {
     void* memalloc(usize size, usize alignment)
     {
+#ifdef _WIN32
+        return _aligned_malloc(size, alignment);
+#else
         return ::aligned_alloc(size, alignment);
+#endif
     }
 
     void memfree(void* ptr, usize alignment)
