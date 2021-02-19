@@ -1,8 +1,11 @@
 ﻿#include <RTCLI/RTCLI.hpp>
 #include "TestSystem.h"
-
+#ifdef RTCLI_COMPILER_MSVC
 #pragma warning(push)
 #pragma warning(disable: 4102)
+#elif defined(RTCLI_COMPILER_CLANG)
+#pragma clang diagnostic ignored "-Wunused-label"
+#endif
 
 //RTCLI::RTCLITestCase::TestSystem::TestInnerClass::Constructor
 //[2-1] Here Begins Stack Declaration
