@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Traits.hpp"
+#include "RTCLI/Traits.hpp"
 
 namespace RTCLI
 {

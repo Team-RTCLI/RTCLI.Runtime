@@ -35,4 +35,4 @@ namespace RTCLI
     using System::new_object;
 }
 
-#include "Internal/Object.inl"
+#include "RTCLI/Runtime/Internal/Object.inl"

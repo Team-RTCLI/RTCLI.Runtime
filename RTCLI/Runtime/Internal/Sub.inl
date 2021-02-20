@@ -1,5 +1,5 @@
 #include "RTCLI/Runtime/Exception.h"
-#include "Traits.hpp"
+#include "RTCLI/Traits.hpp"
 
 namespace RTCLI
 {

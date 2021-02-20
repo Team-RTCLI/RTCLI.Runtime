@@ -235,24 +235,30 @@
 #define RTCLI_NOEXCEPT noexcept
 
 // export attribute for shared_lib
+#ifdef RTCLI_BUILD_LIB
+#define RTCLI_DLLEXPORT 
+#define RTCLI_DLLVISIBLE 
+#define RTCLI_DLLLOCAL 
+#else
 #ifdef __EMSCRIPTEN__
-#include "emscripten.h"
-#define RTCLI_DLLEXPORT EMSCRIPTEN_KEEPALIVE
-#define RTCLI_DLLVISIBLE EMSCRIPTEN_KEEPALIVE
-#define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
-#define __stdcall 
-#elif defined(__GNUC__)
-#define RTCLI_DLLEXPORT __attribute__((visibility("default")))
-#define RTCLI_DLLVISIBLE __attribute__((visibility("default")))
-#define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
-#define __stdcall 
-#else
-#define RTCLI_DLLEXPORT __declspec(dllexport)
-#ifdef DLL_IMPLEMENTATION
-#define RTCLI_DLLVISIBLE __declspec(dllexport)
-#else
-#define RTCLI_DLLVISIBLE __declspec(dllimport)
-#endif
+    #include "emscripten.h"
+    #define RTCLI_DLLEXPORT EMSCRIPTEN_KEEPALIVE
+    #define RTCLI_DLLVISIBLE EMSCRIPTEN_KEEPALIVE
+    #define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
+    #define __stdcall 
+    #elif defined(__GNUC__)
+    #define RTCLI_DLLEXPORT __attribute__((visibility("default")))
+    #define RTCLI_DLLVISIBLE __attribute__((visibility("default")))
+    #define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
+    #define __stdcall 
+    #else
+    #define RTCLI_DLLEXPORT __declspec(dllexport)
+    #ifdef DLL_IMPLEMENTATION
+    #define RTCLI_DLLVISIBLE __declspec(dllexport)
+    #else
+    #define RTCLI_DLLVISIBLE __declspec(dllimport)
+    #endif
+    #endif
 #endif
 
 #ifndef RTCLI_API

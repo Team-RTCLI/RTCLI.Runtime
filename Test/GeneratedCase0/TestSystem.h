@@ -2,10 +2,10 @@
 
 namespace RTCLI::RTCLITestCase
 {
-	RTCLI_API class TestSystem : public RTCLI::System::Object
+	class TestSystem : public RTCLI::System::Object
 	{
 	public:
-		RTCLI_API class TestInnerClass : public RTCLI::System::Object
+		class TestInnerClass : public RTCLI::System::Object
 		{
 		public:
 			RTCLI::System::Void Constructor(RTCLI::System::Int32 id);
