@@ -208,19 +208,6 @@
 #endif // RTCLI_MANUAL_CONFIG_CPP_STANDARD_VERSION
 
 // Compiler Defines
-#if defined(RTCLI_COMPILER_MSVC)
-    #define RTCLI_DLL_EXPORT __declspec(dllexport)
-#else
-    #define RTCLI_DLL_EXPORT __attribute__ ((visibility("default")))
-#endif
-
-// define RTCLI_BUILD_LIB in module's project config or API's source file, not in public domain.
-#if defined(RTCLI_BUILD_LIB)
-	#define RTCLI_EXPORT 
-#else
-	#define RTCLI_EXPORT RTCLI_DLL_EXPORT
-#endif
-
 
 // inline defs
 #ifndef RTCLI_FORCEINLINE
@@ -236,29 +223,43 @@
 
 // export attribute for shared_lib
 #ifdef RTCLI_BUILD_LIB
+#define RTCLI_DLL_EXPORT 
 #define RTCLI_DLLEXPORT 
 #define RTCLI_DLLVISIBLE 
 #define RTCLI_DLLLOCAL 
 #else
-#ifdef __EMSCRIPTEN__
+    #ifdef __EMSCRIPTEN__
     #include "emscripten.h"
     #define RTCLI_DLLEXPORT EMSCRIPTEN_KEEPALIVE
+    #define RTCLI_DLL_EXPORT EMSCRIPTEN_KEEPALIVE
     #define RTCLI_DLLVISIBLE EMSCRIPTEN_KEEPALIVE
     #define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
     #define __stdcall 
     #elif defined(__GNUC__)
     #define RTCLI_DLLEXPORT __attribute__((visibility("default")))
+    #define RTCLI_DLL_EXPORT __attribute__((visibility("default")))
     #define RTCLI_DLLVISIBLE __attribute__((visibility("default")))
     #define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
     #define __stdcall 
     #else
     #define RTCLI_DLLEXPORT __declspec(dllexport)
+    #define RTCLI_DLL_EXPORT __declspec(dllexport)
     #ifdef DLL_IMPLEMENTATION
     #define RTCLI_DLLVISIBLE __declspec(dllexport)
     #else
     #define RTCLI_DLLVISIBLE __declspec(dllimport)
     #endif
     #endif
+#if defined(RTCLI_COMPILER_MSVC)
+#else
+#endif
+#endif
+
+// define RTCLI_BUILD_LIB in module's project config or API's source file, not in public domain.
+#if defined(RTCLI_BUILD_LIB)
+#define RTCLI_EXPORT 
+#else
+#define RTCLI_EXPORT RTCLI_DLL_EXPORT
 #endif
 
 #ifndef RTCLI_API
