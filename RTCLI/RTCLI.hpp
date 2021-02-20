@@ -6,7 +6,7 @@
 #include "Runtime/Object.h"
 #include "Runtime/IL.h"
 
-#include "Runtime/Console/WriteLine.h"
+#include "Runtime/Console/Write.h"
 
 #ifndef RTCLI_API
 #define RTCLI_API RTCLI_DLLVISIBLE
