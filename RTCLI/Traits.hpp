@@ -2,6 +2,7 @@
 #include <type_traits>
 #include "Runtime/Int.h"
 #include "Runtime/Single.h"
+#include "Runtime/Object.h"
 
 namespace RTCLI
 {

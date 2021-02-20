@@ -3,8 +3,11 @@
 #pragma once
 #include "Runtime/Int.h"
 #include "Runtime/Single.h"
-#include "Runtime/Object.h"
+#include "Runtime/Boolean.h"
+
 #include "Runtime/IL.h"
+
+#include "Runtime/String.h"
 
 #include "Runtime/Console/Write.h"
 

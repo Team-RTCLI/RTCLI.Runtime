@@ -1,1 +1,0 @@
-add_executable(GeneratedCase0 TestSystem.h TestSystem.cpp GeneratedCase0.cpp)

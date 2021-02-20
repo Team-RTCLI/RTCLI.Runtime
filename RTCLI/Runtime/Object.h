@@ -16,6 +16,10 @@ namespace RTCLI::System
         using RC = i32;
 
         void Constructor() RTCLI_NOEXCEPT;
+        RTCLI_FORCEINLINE bool operator==(const Object& other) RTCLI_NOEXCEPT
+        {
+            return this == &other;
+        }
 
         const struct Type* type = nullptr;
         RC rc = 0;

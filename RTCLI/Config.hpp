@@ -166,12 +166,15 @@
 #endif
 
 #ifndef RTCLI_MANUAL_CONFIG_COMPILER
+    #if defined(_MSC_VER)
+        #define RTCLI_COMPILER_MSVC
+    #endif
+
     #if defined(__clang__)
         #define RTCLI_COMPILER_CLANG
     #elif defined(__GNUC__)
         #define RTCLI_COMPILER_GCC
     #elif defined(_MSC_VER)
-        #define RTCLI_COMPILER_MSVC
     #else
         #error Unrecognized compiler was used.
     #endif
@@ -241,18 +244,16 @@
     #define RTCLI_DLLVISIBLE __attribute__((visibility("default")))
     #define RTCLI_DLLLOCAL __attribute__((visibility("hidden")))
     #define __stdcall 
-    #else
+    #elif defined(RTCLI_COMPILER_MSVC)
     #define RTCLI_DLLEXPORT __declspec(dllexport)
     #define RTCLI_DLL_EXPORT __declspec(dllexport)
-    #ifdef DLL_IMPLEMENTATION
-    #define RTCLI_DLLVISIBLE __declspec(dllexport)
+        #ifdef DLL_IMPLEMENTATION
+        #define RTCLI_DLLVISIBLE __declspec(dllexport)
+        #else
+        #define RTCLI_DLLVISIBLE __declspec(dllimport)
+        #endif
     #else
-    #define RTCLI_DLLVISIBLE __declspec(dllimport)
     #endif
-    #endif
-#if defined(RTCLI_COMPILER_MSVC)
-#else
-#endif
 #endif
 
 // define RTCLI_BUILD_LIB in module's project config or API's source file, not in public domain.
@@ -268,6 +269,17 @@
 
 #ifndef RTCLI_IL_FUNC
 #define RTCLI_IL_FUNC RTCLI_FORCEINLINE
+#endif
+
+#define RTCLI_ZERO_LEN_ARRAY 0
+
+#ifdef RTCLI_COMPILER_MSVC
+#define RTCLI_NATIVE_STRING(str) L##str
+#include <corecrt_wstring.h>
+#define RTCLI_NATIVE_STRING_LENGTH(str) wcslen((str))
+#else
+#define RTCLI_NATIVE_STRING(str) str
+#define RTCLI_NATIVE_STRING_LENGTH(str) strlen((str))
 #endif
 
 #ifndef RTCLI_CUSTOM_BASE_TYPES
@@ -297,6 +309,15 @@ namespace RTCLI
     using c16 = char16_t;
     using c32 = char32_t;
 
+#ifdef RTCLI_COMPILER_MSVC
+    using Char = wchar_t;
+    using NativeChar = wchar_t;
+#define RTCLI_STRING_LENGTH(str) ::wcslen((str))
+#else
+    using Char = c16;
+    using NativeChar = char;
+#endif
+
     template<typename T, typename V>
     RTCLI_FORCEINLINE T StaticCast(V&& v)
     {
@@ -309,3 +330,4 @@ namespace RTCLI
     }
 }
 #endif
+

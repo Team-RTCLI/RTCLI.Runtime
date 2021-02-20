@@ -6,15 +6,9 @@ namespace RTCLI::System
     template<typename InnerT>
     struct IntT
     {
-        RTCLI_FORCEINLINE IntT() RTCLI_NOEXCEPT
-        {
-
-        }
+        RTCLI_FORCEINLINE IntT() RTCLI_NOEXCEPT {}
         RTCLI_FORCEINLINE IntT(InnerT v) RTCLI_NOEXCEPT
-            :value(v)
-        {
-
-        }
+            :value(v) {}
         RTCLI_FORCEINLINE bool operator==(const InnerT other) RTCLI_NOEXCEPT
         {
             return value == other;
