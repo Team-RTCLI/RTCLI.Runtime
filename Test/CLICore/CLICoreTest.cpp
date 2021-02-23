@@ -1,5 +1,22 @@
 #include <iostream>
 #include <RTCLI/RTCLI.hpp>
+#include "RTCLI/Runtime/IComparable.h"
+
+class Com : RTCLI::System::Object, RTCLI::System::IComparable_1<Com>
+{
+public:
+    RTCLI::System::Boolean CompareTo(RTCLI::P<Com> other) override
+    {
+        return this->val == other.Get().val;
+    }
+    int val = 0;
+};
+
+struct Fuck : RTCLI::System::IComparable_1<Fuck>
+{
+    int val = 1;
+};
+
 
 int main()
 {
@@ -29,6 +46,15 @@ int main()
     {
         std::cerr << "RTCLI::StaticCast error!" << std::endl;
     }
+
+    Com a; a.val = 1;
+    Com b; b.val = 2;
+    if(a.CompareTo(b))
+    {
+        std::cerr << "CompareTo Error!" << std::endl;
+    }
+    Fuck f1; f1.val = 1;
+    Fuck f2; f2.val = 2;
 
     RTCLI::frame();
     RTCLI::close();

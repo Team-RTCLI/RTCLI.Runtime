@@ -100,6 +100,11 @@
 // The debug layer will produce detailed error and warning informations when some errors occur.
 //#define RTCLI_DEBUG_LAYER
 
+#ifdef interface
+#undef interface
+#endif
+#define interface struct
+
 //------------------------- End of User Configuration Section -------------------------
 
 #ifndef RTCLI_MANUAL_CONFIG_CPU_ARCHITECTURE

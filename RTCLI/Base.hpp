@@ -69,4 +69,28 @@ namespace RTCLI
 		};
     };
 	static_assert(sizeof(uuid) == sizeof(char) * 12, "uuid size error!");
+
+	// MSDN: https://docs.microsoft.com/zh-cn/dotnet/api/system.typecode?view=net-5.0
+	enum class ETypeCode : u32
+	{
+		Boolean = 3,
+		Byte = 6,
+		Char = 4,
+		DateTime = 16,
+		DBNull = 2,
+		Decimal = 15,
+		Double = 14,
+		Empty = 0,
+		Int16 = 7,
+		Int32 = 9,
+		Object = 1,
+		SByte = 5,
+		Single = 13,
+		String = 18,
+		UInt16 = 8,
+		UInt32 = 10,
+		UInt64 = 12,
+		Count
+	};
+	using TypeCode = ETypeCode;
 }

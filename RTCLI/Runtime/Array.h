@@ -11,6 +11,7 @@ namespace RTCLI::System
 	template<class T>
 	struct ElementArray : public Array
 	{
+		
 	};
 
 	template<typename T>

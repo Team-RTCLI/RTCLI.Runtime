@@ -2,6 +2,7 @@
 #include <type_traits>
 #include "Runtime/Int.h"
 #include "Runtime/Single.h"
+#include "Runtime/Boolean.h"
 #include "Runtime/Object.h"
 
 namespace RTCLI
@@ -55,4 +56,32 @@ namespace RTCLI
     };
     template<typename T>
     static constexpr bool is_numeric_v = is_numeric<T>::value;
+
+	template<typename T>
+	struct RefT
+	{
+		RefT(T& reference)
+			:object(&reference)
+		{
+
+		}
+		RTCLI_FORCEINLINE T& Get() RTCLI_NOEXCEPT
+		{
+			return *object;
+		}
+		RTCLI_FORCEINLINE const T& Get() const RTCLI_NOEXCEPT
+		{
+			return *object;
+		}
+		static_assert(std::is_base_of_v<System::Object, T>, "Ref can only contain objects!");
+
+		T* object = nullptr;
+	};
+	using ObjectRef = RefT<System::Object>;
+    template<typename T>
+    using ValueT = T;
+
+    template<typename T>
+    using P = RefT<T>;
 }
+
