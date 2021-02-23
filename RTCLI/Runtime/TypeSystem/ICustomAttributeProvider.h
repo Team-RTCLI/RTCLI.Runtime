@@ -12,8 +12,8 @@ namespace Reflection
     {
         virtual System::ElementArray<System::Object> GetCustomAttributes(bool inherit) = 0;
         virtual System::ElementArray<System::Object> GetCustomAttributes(
-            P<Type> attributeType, bool inherit) = 0;
-        System::Boolean IsDefined(RefT<Type> attributeType, bool inherit) = 0; 
+            TRef<Type> attributeType, bool inherit) = 0;
+        virtual System::Boolean IsDefined(TRef<Type> attributeType, bool inherit) = 0; 
     };
 }
 }

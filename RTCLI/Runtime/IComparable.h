@@ -7,7 +7,7 @@ namespace RTCLI::System
     template<typename T>
     interface [[CLR]] IComparable_1
     {
-        virtual Boolean CompareTo(P<T> other) = 0;
+        virtual Boolean CompareTo(TRef<T> other) = 0;
     };
 
     //MSDN: https://docs.microsoft.com/zh-cn/dotnet/api/system.icomparable?view=net-5.0

@@ -62,3 +62,8 @@ INSTALL (
     DESTINATION include/RTCLI
     FILES_MATCHING PATTERN "*.inl"
 )
+
+set(CLANG_DISABLED_WARNINGS "-Wno-unknown-attributes")
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    target_compile_options(${RTCLI_IMPL_NAME} PUBLIC ${CLANG_DISABLED_WARNINGS})
+endif()

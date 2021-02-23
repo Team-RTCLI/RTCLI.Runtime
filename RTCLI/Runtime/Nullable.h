@@ -32,7 +32,7 @@ namespace System
         template<typename T>
         static Boolean Equals(Nullable_1<T>, Nullable_1<T>);
 
-        static const Type& GetUnderlyingType(RefT<Type> nullableType);
+        static const Type& GetUnderlyingType(TRef<Type> nullableType);
     };
 }
 }

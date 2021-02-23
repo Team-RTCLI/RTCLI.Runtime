@@ -4,7 +4,7 @@
 
 namespace RTCLI::System
 {
-    class [[CLR, Abstract]] Type
+    struct [[CLR, Abstract]] Type
     {
         
     };

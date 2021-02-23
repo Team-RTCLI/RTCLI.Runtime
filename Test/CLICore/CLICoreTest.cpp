@@ -1,20 +1,34 @@
 #include <iostream>
 #include <RTCLI/RTCLI.hpp>
 #include "RTCLI/Runtime/IComparable.h"
+#include "RTCLI/Runtime/ValueType.h"
 
 class Com : RTCLI::System::Object, RTCLI::System::IComparable_1<Com>
 {
 public:
-    RTCLI::System::Boolean CompareTo(RTCLI::P<Com> other) override
+    RTCLI::System::Boolean CompareTo(RTCLI::TRef<Com> other) override
     {
         return this->val == other.Get().val;
     }
     int val = 0;
 };
 
-struct Fuck : RTCLI::System::IComparable_1<Fuck>
+struct Fuck
 {
+    RTCLI::System::Boolean CompareTo(Fuck other) 
+    {
+        return this->val == other.val;
+    }
     int val = 1;
+};
+
+struct Fuck_v : RTCLI::System::ValueType, RTCLI::System::IComparable_1<Fuck_v>
+{
+    Fuck ent;
+    RTCLI::System::Boolean CompareTo(RTCLI::TRef<Fuck_v> other) override
+    {
+        return ent.CompareTo(other.Get().ent);
+    }
 };
 
 

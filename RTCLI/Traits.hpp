@@ -58,12 +58,13 @@ namespace RTCLI
     static constexpr bool is_numeric_v = is_numeric<T>::value;
 
 	template<typename T>
-	struct RefT
+	struct TRef
 	{
-		RefT(T& reference)
+        RTCLI_FORCEINLINE TRef(){}
+		RTCLI_FORCEINLINE TRef(T& reference)
 			:object(&reference)
 		{
-
+            
 		}
 		RTCLI_FORCEINLINE T& Get() RTCLI_NOEXCEPT
 		{
@@ -73,15 +74,21 @@ namespace RTCLI
 		{
 			return *object;
 		}
-		static_assert(std::is_base_of_v<System::Object, T>, "Ref can only contain objects!");
+        RTCLI_FORCEINLINE System::Boolean isNull() const RTCLI_NOEXCEPT
+        {
+            if(!object)
+                return true;
+            if constexpr (std::is_base_of_v<System::Object, T>)
+                return object->isNull();
+            else
+                return false;
+        }
 
 		T* object = nullptr;
 	};
-	using ObjectRef = RefT<System::Object>;
+	using ObjectRef = TRef<System::Object>;
     template<typename T>
-    using ValueT = T;
+    using TValue = T;
 
-    template<typename T>
-    using P = RefT<T>;
 }
 
