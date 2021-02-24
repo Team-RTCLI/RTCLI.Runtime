@@ -77,4 +77,9 @@ namespace RTCLI::System
 
         return (String&)RTCLI::null;
     }
+
+    RTCLI_API System::Int32 String::get_Length() const RTCLI_NOEXCEPT
+    {
+        return length;
+    }
 }

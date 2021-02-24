@@ -9,19 +9,19 @@ namespace RTCLI::System
         RTCLI_FORCEINLINE IntT() RTCLI_NOEXCEPT {}
         RTCLI_FORCEINLINE IntT(InnerT v) RTCLI_NOEXCEPT
             :value(v) {}
-        RTCLI_FORCEINLINE bool operator==(const InnerT other) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE bool operator==(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value == other;
         }
-        RTCLI_FORCEINLINE bool operator!=(const InnerT other) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE bool operator!=(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value != other;
         }
-        RTCLI_FORCEINLINE bool operator<(const InnerT other) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE bool operator<(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value < other;
         }
-        RTCLI_FORCEINLINE bool operator>(const InnerT other) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE bool operator>(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value > other;
         }
@@ -45,7 +45,7 @@ namespace RTCLI::System
             lhs -= other;
             return lhs;
         }
-        RTCLI_FORCEINLINE operator InnerT() RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE operator InnerT() const RTCLI_NOEXCEPT
         {
             return value;
         }

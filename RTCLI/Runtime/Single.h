@@ -25,7 +25,11 @@ namespace RTCLI::System
         static constexpr f32 NaN = SingleInfo::quiet_NaN();
         static constexpr f32 NegativeInfinity = -1.f * SingleInfo::infinity();
         static constexpr f32 PositiveInfinity = SingleInfo::infinity();
-
+        
+        RTCLI_FORCEINLINE operator f32() const RTCLI_NOEXCEPT
+        {
+            return value;
+        }
         //Int32 CompareTo(const struct Object& value);
         //Int32 CompareTo(f32 value);
         //Int32 CompareTo(Single value);
