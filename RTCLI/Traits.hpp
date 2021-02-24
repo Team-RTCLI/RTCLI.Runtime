@@ -97,7 +97,5 @@ namespace RTCLI
 		T* object = nullptr;
 	};
 	using ObjectRef = TRef<System::Object>;
-    template<typename T>
-    using TValue = T;
 }
 

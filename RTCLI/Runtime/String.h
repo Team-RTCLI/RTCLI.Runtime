@@ -16,6 +16,8 @@ namespace RTCLI::System
 		}
 
 		System::Int32 get_Length() const RTCLI_NOEXCEPT;
+		System::String& ToLower(void) const RTCLI_NOEXCEPT;
+		System::String& ToUpper(void) const RTCLI_NOEXCEPT;
 
         ///< Length of string *excluding* the trailing null (which is included in 'chars').
 		i32 length = 0; 
