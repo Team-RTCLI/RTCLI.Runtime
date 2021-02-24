@@ -5,39 +5,42 @@
 
 using namespace RTCLI::System::Console;
 
-RTCLI_API void RTCLI::System::Console::WriteLine(const RTCLI::Char* str) RTCLI_NOEXCEPT
+RTCLI_API void RTCLI::System::Console::WriteLine(const Char* str) RTCLI_NOEXCEPT
 {
-#ifdef _MSC_VER
 	std::wcout << str << std::endl;
-#else
-	std::cout << str << std::endl;
-#endif
 }
 
-RTCLI_API void RTCLI::System::Console::Write(const RTCLI::Char* str) RTCLI_NOEXCEPT
+RTCLI_API void RTCLI::System::Console::Write(const Char* str) RTCLI_NOEXCEPT
 {
-#ifdef _MSC_VER
 	std::wcout << str;
-#else
-	std::cout << str;
-#endif
 }
 
-
-RTCLI_API void RTCLI::System::Console::WriteLine(const RTCLI::System::String& str) RTCLI_NOEXCEPT
+RTCLI_API void RTCLI::System::Console::WriteLine(const System::String& str) RTCLI_NOEXCEPT
 {
-#ifdef _MSC_VER
 	std::wcout << str.chars << std::endl;
-#else
-	std::cout << str.chars << std::endl;
-#endif
 }
 
-RTCLI_API void RTCLI::System::Console::Write(const RTCLI::System::String& str) RTCLI_NOEXCEPT
+RTCLI_API void RTCLI::System::Console::Write(const System::String& str) RTCLI_NOEXCEPT
 {
-#ifdef _MSC_VER
 	std::wcout << str.chars;
-#else
-	std::cout << str.chars;
-#endif
+}
+
+RTCLI_API void RTCLI::System::Console::WriteLine(const System::Int32 int_) RTCLI_NOEXCEPT
+{
+	std::wcout << i32(int_) << std::endl;
+}
+
+RTCLI_API void RTCLI::System::Console::Write(const System::Int32 int_) RTCLI_NOEXCEPT
+{
+	std::wcout << i32(int_);
+}
+
+RTCLI_API void RTCLI::System::Console::WriteLine(const System::Single f) RTCLI_NOEXCEPT
+{
+	std::wcout << f32(f) << std::endl;
+}
+
+RTCLI_API void RTCLI::System::Console::Write(const System::Single f) RTCLI_NOEXCEPT
+{
+	std::wcout << f32(f);
 }
