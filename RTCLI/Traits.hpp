@@ -67,13 +67,15 @@ namespace RTCLI
 		{
             
 		}
-        TRef& operator=(const T& object_) RTCLI_NOEXCEPT
+        TRef& operator=(T& object_) RTCLI_NOEXCEPT
         {
             object = &object_;
+            return *this; 
         }
         TRef& operator=(nullptr_t null) RTCLI_NOEXCEPT
         {
             object = nullptr;
+            return *this;
         }
 		RTCLI_FORCEINLINE T& Get() RTCLI_NOEXCEPT
 		{
