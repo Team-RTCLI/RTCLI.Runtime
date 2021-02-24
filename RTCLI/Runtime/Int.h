@@ -62,6 +62,7 @@ namespace RTCLI::System
     using UInt16 = IntT<u16>;
     using UInt32 = IntT<u32>;
     using UInt64 = IntT<u64>;
+    using IntPtr = IntT<iptr>;
 }
 
 namespace RTCLI
@@ -70,7 +71,7 @@ namespace RTCLI
     using Int16 = System::Int16;
     using Int32 = System::Int32;
     using Int64 = System::Int64;
-
+    using IntPtr = System::IntPtr;
 
     using UInt8 = System::UInt8;
     using UInt16 = System::UInt16;

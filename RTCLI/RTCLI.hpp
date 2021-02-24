@@ -10,6 +10,9 @@
 #include "Runtime/String.h"
 
 #include "Runtime/Console/Write.h"
+#include "Runtime/IComparable.h"
+#include "Runtime/IConvertible.h"
+#include "Runtime/IEquatable.h"
 
 #ifndef RTCLI_API
 #define RTCLI_API RTCLI_DLLVISIBLE

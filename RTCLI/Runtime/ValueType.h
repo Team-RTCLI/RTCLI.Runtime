@@ -15,5 +15,14 @@ namespace System
         virtual Type& GetType() RTCLI_NOEXCEPT = 0;
 
     };
+
+    template<class T>
+    void initialize_object(IntPtr address);
 }
+}
+
+
+namespace RTCLI
+{
+    using System::initialize_object;
 }

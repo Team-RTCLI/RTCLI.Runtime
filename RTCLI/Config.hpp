@@ -299,6 +299,7 @@ namespace RTCLI
     using i64 = std::int64_t;
     using f32 = float;
     using f64 = double;
+    using iptr = std::intptr_t;
     using usize = std::size_t;
     using isize = std::ptrdiff_t;
     using Void = void;
