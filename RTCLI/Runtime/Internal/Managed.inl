@@ -4,6 +4,26 @@ namespace System
 {
     // *******************  Managed<T>  *************************//
     template<typename T>
+    RTCLI_FORCEINLINE Managed<T>::operator const T&() const RTCLI_NOEXCEPT
+    {
+        if(!object)
+        {
+            return null;
+        }
+        return *static_cast<const T*>(object);
+    }
+
+    template<typename T>
+    RTCLI_FORCEINLINE Managed<T>::operator T&() RTCLI_NOEXCEPT
+    {
+        if(!object)
+        {
+            return null;
+        }
+        return *static_cast<T*>(object);
+    }
+
+    template<typename T>
     RTCLI_FORCEINLINE Managed<T>::Managed() RTCLI_NOEXCEPT
         :object(const_cast<System::Object*>(&RTCLI::nullObject))
     {

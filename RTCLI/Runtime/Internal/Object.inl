@@ -49,10 +49,14 @@ namespace RTCLI::System
     template<typename T, typename... Args>
     T& new_object(Args&&... args)
     {
-        static_assert(std::is_base_of_v<Object, T>, "RTCLI::Runtime::new_object: must initialize an object derived from RTCLI::Object!");
+        static_assert(
+            std::is_base_of_v<Object, T>,
+            "RTCLI::Runtime::new_object: must initialize an object derived from RTCLI::Object!"
+        );
         
-        std::cerr << "new_object unimplemented!" << std::endl;
-        return *(T*)RTCLI::null;
+        T* result = new T(std::forward<Args>(args)...);
+
+        return *result;
     }
 
 

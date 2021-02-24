@@ -67,6 +67,8 @@ namespace System
         Managed& operator=(const System::Object& object_) RTCLI_NOEXCEPT;
         T& Get() RTCLI_NOEXCEPT;
         const T& Get() const RTCLI_NOEXCEPT;
+        operator const T&() const RTCLI_NOEXCEPT;
+        operator T&() RTCLI_NOEXCEPT;
     protected:
         System::Object* object = nullptr;
     };
