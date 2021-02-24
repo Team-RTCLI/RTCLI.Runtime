@@ -30,30 +30,15 @@ namespace System
         RC rc = 0;
         Flags flags = EObjectFlagBits::None;
 
-        RTCLI_FORCEINLINE Object(
-            const struct Type* t_ = nullptr, RC rc_ = 0, Flags flags_ = EObjectFlagBits::None)
-            :type(t_), rc(rc_), flags(flags_)
-        {}
+        RTCLI_FORCEINLINE Object(const struct Type* t_ = nullptr,
+            RC rc_ = 0, Flags flags_ = EObjectFlagBits::None);
 
         // null
-        RTCLI_FORCEINLINE Object(const nullref_t null)
-            :type(nullptr), rc(1), flags(EObjectFlagBits::Null)
-        {}
+        RTCLI_FORCEINLINE Object(const nullref_t null);
         RTCLI_FORCEINLINE Object& operator=(const nullref_t null) RTCLI_NOEXCEPT;
 
         void Constructor() RTCLI_NOEXCEPT;
-        RTCLI_FORCEINLINE bool operator==(const Object& other) const RTCLI_NOEXCEPT
-        {
-            if(this == &other)
-            {
-                return true;
-            }
-            if(flags & EObjectFlagBits::Null)
-            {
-                return (other.flags & EObjectFlagBits::Null);
-            }
-            return false;
-        }
+        RTCLI_FORCEINLINE bool operator==(const Object& other) const RTCLI_NOEXCEPT;
 
         static Boolean Equals(TRef<System::Object> objA, TRef<System::Object> objB) RTCLI_NOEXCEPT;
         static Boolean ReferenceEquals(TRef<System::Object> objA, TRef<System::Object> objB) RTCLI_NOEXCEPT;
@@ -76,80 +61,34 @@ namespace System
             std::is_base_of_v<System::Object, T>,
             "ManagedObject must be derived from System::Object!"
         );
-        Managed(nullref_t null) RTCLI_NOEXCEPT
-            :object(const_cast<System::Object*>(&RTCLI::nullObject))
-        {
-
-        }
-        Managed(const System::Object& object_) RTCLI_NOEXCEPT
-        {
-            if (object_.isNull()) {
-                object = const_cast<System::Object*>(&RTCLI::nullObject);
-            }
-            else
-            {
-                object = const_cast<System::Object*>(&object_);
-            }
-        }
-        Managed& operator=(const System::Object& object_) RTCLI_NOEXCEPT
-        {
-            if(this->object == &object_)
-            {
-                return *this;
-            }
-            if (object_.isNull()) {
-                object = const_cast<System::Object*>(&RTCLI::nullObject);
-            }
-            else
-            {
-                object = const_cast<System::Object*>(&object_);
-            }
-        }
-        T& Get() RTCLI_NOEXCEPT
-        {
-            return *static_cast<T*>(object);
-        }
-
+        Managed() RTCLI_NOEXCEPT;
+        Managed(nullref_t null) RTCLI_NOEXCEPT;
+        Managed(const System::Object& object_) RTCLI_NOEXCEPT;
+        Managed& operator=(const System::Object& object_) RTCLI_NOEXCEPT;
+        T& Get() RTCLI_NOEXCEPT;
+        const T& Get() const RTCLI_NOEXCEPT;
+    protected:
         System::Object* object = nullptr;
     };
 
     template<typename T, typename... Args>
     T& new_object(Args&&... args);
-
     RTCLI_API Object& new_object(const Type& objectType) RTCLI_NOEXCEPT;
+
+    static const System::nullref_t null;
+    static const System::Object nullObject 
+        = System::Object{ nullptr, 0, System::EObjectFlagBits::Null };
 }
 }
 
 namespace RTCLI
 {
-    static const System::nullref_t null;
-    static const System::Object nullObject 
-        = System::Object{ nullptr, 0, System::EObjectFlagBits::Null };
+    using System::null;
+    using System::nullObject;
 
     using System::Managed;
     using System::new_object;
-
-namespace System
-{
-    RTCLI_FORCEINLINE Object& Object::operator=(const nullref_t null) RTCLI_NOEXCEPT
-    {
-        return const_cast<Object&>(RTCLI::nullObject);
-    }
-
-    template <typename T>
-    RTCLI_FORCEINLINE nullref_t::operator T&() const
-    {
-        union TypeSafetyBreaker {
-            std::reference_wrapper<const Object> nullRef;
-            // see https://stackoverflow.com/questions/38691282/use-of-union-with-reference
-            std::reference_wrapper<T> ref; 
-        };
-        TypeSafetyBreaker ptr = {.nullRef = nullObject};
-
-        // unwrap the reference
-        return ptr.ref.get();
-    }
-}
 }
 
 #include "RTCLI/Runtime/Internal/Object.inl"
+#include "RTCLI/Runtime/Internal/Managed.inl"
