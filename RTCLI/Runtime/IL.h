@@ -72,7 +72,7 @@ namespace RTCLI
     template<class T>
     RTCLI_IL_FUNC T& Castclass(System::Object& object);
 
-#define RTCLI_ADDRESSOF(val) (RTCLI::IntPtr)(iptr)std::addressof(val)
+#define RTCLI_ADDRESSOF(val) val
 
     template<class T>
     RTCLI_IL_FUNC void Pop(T&&) {}

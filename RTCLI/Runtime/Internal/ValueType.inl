@@ -1,8 +1,8 @@
 namespace RTCLI::System
 {
     template<class T>
-    void initialize_object(IntPtr address);
+    void initialize_object(T& address);
     {
-        new((void*)address) T();
+        new((void*)&address) T();
     }
 }
