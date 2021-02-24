@@ -9,7 +9,7 @@ namespace RTCLI::System
             // see https://stackoverflow.com/questions/38691282/use-of-union-with-reference
             std::reference_wrapper<T> ref; 
         };
-        TypeSafetyBreaker ptr = {.nullRef = nullObject};
+        TypeSafetyBreaker ptr = {nullObject};
 
         // unwrap the reference
         return ptr.ref.get();

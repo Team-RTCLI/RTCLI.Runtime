@@ -15,8 +15,6 @@ if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
 %~dp0
 cd %~dp0
 
-cmake --no-warn-unused-cli -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug -B./build -G Ninja
-cmake --build ./build --config Debug --target install -- -j 26
-
+cmake --build ./build --config Debug --target install 
 
 pause
