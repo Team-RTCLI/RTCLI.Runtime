@@ -104,9 +104,9 @@ namespace System
     };
 
     template<typename T, typename... Args>
-    Managed<T> new_object(Args&&... args);
+    T& new_object(Args&&... args);
 
-    RTCLI_API Managed<Object> new_object(const Type& objectType) RTCLI_NOEXCEPT;
+    RTCLI_API Object& new_object(const Type& objectType) RTCLI_NOEXCEPT;
 }
 }
 

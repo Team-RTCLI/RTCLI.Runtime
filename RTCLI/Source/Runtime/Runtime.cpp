@@ -50,11 +50,10 @@ namespace RTCLI::System
         return str;
     }
 
-    RTCLI_API Managed<Object> new_object(const struct Type& objectType) RTCLI_NOEXCEPT
+    RTCLI_API Object& new_object(const struct Type& objectType) RTCLI_NOEXCEPT
     {
-        Managed<Object> res = RTCLI::null;
         std::cerr << "new_object unimplemented!" << std::endl;
-        return res;
+        return *(Object*)RTCLI::null;
     }
 
     // *******************  Exception  *************************//

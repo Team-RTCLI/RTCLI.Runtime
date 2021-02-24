@@ -4,6 +4,7 @@
 #include "Runtime/Int.h"
 #include "Runtime/Single.h"
 #include "Runtime/Boolean.h"
+#include "Runtime/Array.h"
 
 #include "Runtime/IL.h"
 
