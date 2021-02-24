@@ -9,52 +9,39 @@
 namespace RTCLI
 {
     template<typename T>
-    struct is_unsigned
-    {
-        static constexpr bool value =
-            std::is_same_v<T, u8> ||
-            std::is_same_v<T, u16> ||
-            std::is_same_v<T, u32> ||
-            std::is_same_v<T, u64> ||
-            std::is_same_v<T, usize> 
-            ||
-            std::is_same_v<T, UInt8> ||
-            std::is_same_v<T, UInt16> ||
-            std::is_same_v<T, UInt32> ||
-            std::is_same_v<T, UInt64>
-            ;
-    };
+    struct is_unsigned : std::disjunction<
+        std::is_same<T, u8>,
+        std::is_same<T, u16>,
+        std::is_same<T, u32>,
+        std::is_same<T, u64>,
+        std::is_same<T, usize>,
+        std::is_same<T, UInt8>,
+        std::is_same<T, UInt16>,
+        std::is_same<T, UInt32>,
+        std::is_same<T, UInt64>> {};
     template<typename T>
     static constexpr bool is_unsigned_v = is_unsigned<T>::value;
 
     template<typename T>
-    struct is_signed
-    {
-        static constexpr bool value =
-            std::is_same_v<T, i8> ||
-            std::is_same_v<T, i16> ||
-            std::is_same_v<T, i32> ||
-            std::is_same_v<T, f32> ||
-            std::is_same_v<T, i64> ||
-            std::is_same_v<T, f64> ||
-            std::is_same_v<T, isize>
-            ||
-            std::is_same_v<T, Int8> ||
-            std::is_same_v<T, Int16> ||
-            std::is_same_v<T, Int32> ||
-            std::is_same_v<T, Int64> ||
-            std::is_same_v<T, Single> ||
-            std::is_same_v<T, Double>
-            ;
-    };
+    struct is_signed : std::disjunction<
+        std::is_same<T, i8>,
+        std::is_same<T, i16>,
+        std::is_same<T, i32>,
+        std::is_same<T, f32>,
+        std::is_same<T, i64>,
+        std::is_same<T, f64>,
+        std::is_same<T, isize>,
+        std::is_same<T, Int8>,
+        std::is_same<T, Int16>,
+        std::is_same<T, Int32>,
+        std::is_same<T, Int64>,
+        std::is_same<T, Single>,
+        std::is_same<T, Double>> {};
     template<typename T>
     static constexpr bool is_signed_v = is_signed<T>::value;
 
     template<typename T>
-    struct is_numeric
-    {
-        static constexpr bool value = is_unsigned_v<T> || is_signed_v<T>;
-    };
+    struct is_numeric : std::disjunction<is_unsigned<T>, is_signed<T>> {};
     template<typename T>
     static constexpr bool is_numeric_v = is_numeric<T>::value;
 
@@ -95,7 +82,40 @@ namespace RTCLI
                 return false;
         }
 		T* object = nullptr;
-	};
+	}; 
 	using ObjectRef = TRef<System::Object>;
+
+    template<typename T>
+    class TValue
+    {
+        RTCLI_FORCEINLINE TValue(const T& value)
+            :value(value)
+        {
+
+        }
+        TValue& operator=(const T& value) RTCLI_NOEXCEPT
+        {
+            this->value = value;
+            return *this;
+        }
+        RTCLI_FORCEINLINE T& Get() RTCLI_NOEXCEPT
+        {
+            return value;
+        }
+        RTCLI_FORCEINLINE const T& Get() const RTCLI_NOEXCEPT
+        {
+            return value;
+        }
+        T value;
+    };
+
+    template<typename T>
+    using TVar = std::conditional_t<std::is_base_of_v<System::Object, T>, TRef<T>, TValue<T>>;
+
+    template<typename T>
+    using TField = std::conditional_t<std::is_base_of_v<System::Object, T>, Managed<T>, TValue<T>>;
+
+    template<typename T>
+    using TRet = std::conditional_t<std::is_base_of_v<System::Object, T>, T&, T>;
 }
 

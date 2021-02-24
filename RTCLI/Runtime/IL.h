@@ -62,6 +62,8 @@ namespace RTCLI
         return bool(val1);
     }
 
+    template<class T>
+    RTCLI_IL_FUNC T& Dup(T& object);
 
     template<class T>
     RTCLI_IL_FUNC T& Box(const typename T::ValueType& value);
