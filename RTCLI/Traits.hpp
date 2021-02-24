@@ -67,6 +67,16 @@ namespace RTCLI
 		{
             
 		}
+        TRef& operator=(T& object_) RTCLI_NOEXCEPT
+        {
+            object = &object_;
+            return *this; 
+        }
+        TRef& operator=(nullptr_t null) RTCLI_NOEXCEPT
+        {
+            object = nullptr;
+            return *this;
+        }
 		RTCLI_FORCEINLINE T& Get() RTCLI_NOEXCEPT
 		{
 			return *object;
@@ -89,5 +99,26 @@ namespace RTCLI
 	using ObjectRef = TRef<System::Object>;
     template<typename T>
     using TValue = T;
+
+
+    template<class T, class = void>
+    struct StackValImpl {
+        using StackValT = TValue<T>;
+    };
+    template<class T>
+    struct StackValImpl<T, std::enable_if_t<std::is_base_of_v<System::Object, T>>> {
+        using StackValT = TRef<T>;
+    };
+    template<typename T>
+    using StackVal = typename StackValImpl<T>::StackValT;
+
+    static_assert(
+        std::is_same_v<StackVal<System::Object>, ObjectRef>,
+        "Should be same!"
+    );
+    static_assert(
+        std::is_same_v<StackVal<std::string>, std::string>,
+        "Should be same!"
+    );
 }
 
