@@ -17,7 +17,7 @@ namespace System
     };
 
     template<class T>
-    void initialize_object(IntPtr address);
+    void initialize_object(T& address);
 }
 }
 
