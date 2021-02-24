@@ -17,7 +17,8 @@ namespace RTCLI
         std::cerr << "Add_Ovf Unimplemented!" << std::endl;
         if (false)
         {
-            const OverflowException& e = *new_object<OverflowException>(nullptr, nullptr, nullptr)
+            const OverflowException& e 
+                = new_object<OverflowException>(nullptr, nullptr, nullptr).Get();
             RTCLI::Throw(e);
         }
         return val1 + val2;
@@ -30,7 +31,8 @@ namespace RTCLI
         std::cerr << "Add_Ovf_Un Unimplemented!" << std::endl;
         if (false)
         {
-            const OverflowException& e = *new_object<OverflowException>(nullptr, nullptr, nullptr)
+            const OverflowException& e = 
+                new_object<OverflowException>(nullptr, nullptr, nullptr).Get();
             RTCLI::Throw(e);
         }
         return val1 + val2;

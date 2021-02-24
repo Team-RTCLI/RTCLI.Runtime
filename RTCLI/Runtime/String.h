@@ -3,8 +3,9 @@
 
 namespace RTCLI::System
 {
-	struct RTCLI_API String : public Object
+	class RTCLI_API String : public Object
 	{
+	public:
         static String& Intern(const String& str) RTCLI_NOEXCEPT;
 		static String& IsInterned(const String& str) RTCLI_NOEXCEPT;
 

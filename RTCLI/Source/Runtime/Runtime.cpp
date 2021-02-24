@@ -32,49 +32,48 @@ namespace RTCLI::System
 
     RTCLI_API Int32 Object::GetHashCode() const RTCLI_NOEXCEPT
     {
-        std::cerr << "unimplemented!" << std::endl;
+        std::cerr << "Object::GetHashCode unimplemented!" << std::endl;
         return 0;
     }
 
     RTCLI_API TRef<Type> Object::GetType() const RTCLI_NOEXCEPT
     {
-        TRef<Type> null_;
-        std::cerr << "unimplemented!" << std::endl;
+        TRef<Type> null_ = RTCLI::null;
+        std::cerr << "Object::GetType unimplemented!" << std::endl;
         return null_;
     }
 
     TRef<String> Object::ToString() const RTCLI_NOEXCEPT
     {
         String str = RTCLI_NATIVE_STRING("Object::ToString unimplemented!");
-        std::cerr << "unimplemented!" << std::endl;
+        std::cerr << "Object::ToString unimplemented!" << std::endl;
         return str;
     }
 
-    RTCLI_API Object* new_object(const struct Type& objectType) RTCLI_NOEXCEPT
+    RTCLI_API Managed<Object> new_object(const struct Type& objectType) RTCLI_NOEXCEPT
     {
-        Object* object = new Object();
-        std::cerr << "unimplemented!" << std::endl;
-
-        return object;
+        Managed<Object> res = RTCLI::null;
+        std::cerr << "new_object unimplemented!" << std::endl;
+        return res;
     }
 
     // *******************  Exception  *************************//
     RTCLI_API void Throw(const Exception& exception) RTCLI_NOEXCEPT
     {
-        std::cerr << "unimplemented!" << std::endl;
+        std::cerr << "Throw unimplemented!" << std::endl;
     }
 
     // *******************  String  *************************//
     RTCLI_API String& String::Intern(const String& str) RTCLI_NOEXCEPT
     {
-        std::cerr << "unimplemented!" << std::endl;
+        std::cerr << "String::Intern unimplemented!" << std::endl;
         
         return (String&)RTCLI::null;
     }
 
     RTCLI_API String& String::IsInterned(const String& str) RTCLI_NOEXCEPT
     {
-        std::cerr << "unimplemented!" << std::endl;
+        std::cerr << "String::IsInterned unimplemented!" << std::endl;
 
         return (String&)RTCLI::null;
     }

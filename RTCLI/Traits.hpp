@@ -60,7 +60,7 @@ namespace RTCLI
 	template<typename T>
 	struct TRef
 	{
-        RTCLI_FORCEINLINE TRef(){}
+        RTCLI_FORCEINLINE TRef(nullptr_t null){}
 		RTCLI_FORCEINLINE TRef(T& reference)
 			:object(&reference)
 		{
@@ -83,12 +83,10 @@ namespace RTCLI
             else
                 return false;
         }
-
 		T* object = nullptr;
 	};
 	using ObjectRef = TRef<System::Object>;
     template<typename T>
     using TValue = T;
-
 }
 

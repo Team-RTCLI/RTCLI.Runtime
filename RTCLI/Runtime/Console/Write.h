@@ -5,7 +5,7 @@ namespace RTCLI
 {
 namespace System
 {
-	struct String;
+	class String;
 namespace Console
 {
 	RTCLI_API void WriteLine(const RTCLI::Char* str) RTCLI_NOEXCEPT;
