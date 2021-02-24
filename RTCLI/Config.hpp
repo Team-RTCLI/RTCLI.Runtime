@@ -279,12 +279,9 @@
 #define RTCLI_ZERO_LEN_ARRAY 0
 
 #ifdef RTCLI_COMPILER_MSVC
-#define RTCLI_NATIVE_STRING(str) L##str
 #include <corecrt_wstring.h>
-#define RTCLI_NATIVE_STRING_LENGTH(str) wcslen((str))
 #else
-#define RTCLI_NATIVE_STRING(str) str
-#define RTCLI_NATIVE_STRING_LENGTH(str) strlen((str))
+
 #endif
 
 #ifndef RTCLI_CUSTOM_BASE_TYPES
@@ -317,10 +314,18 @@ namespace RTCLI
 #ifdef RTCLI_COMPILER_MSVC
     using Char = wchar_t;
     using NativeChar = wchar_t;
-#define RTCLI_STRING_LENGTH(str) ::wcslen((str))
+    
+    #define RTCLI_NATIVE_STRING(str) L##str
+    #define RTCLI_NATIVE_STRING_LENGTH(str) wcslen((str))
+
+    #define RTCLI_STRING_FROM_NATIVE(str) const_cast<RTCLI::Char*>(str)
+    #define RTCLI_STRING_LENGTH(str) ::wcslen((str))
 #else
     using Char = c16;
     using NativeChar = char;
+
+    #define RTCLI_NATIVE_STRING(str) str
+    #define RTCLI_NATIVE_STRING_LENGTH(str) strlen((str))
 #endif
 
     template<typename T, typename V>

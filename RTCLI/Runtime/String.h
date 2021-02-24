@@ -9,10 +9,10 @@ namespace RTCLI::System
         static String& Intern(const String& str) RTCLI_NOEXCEPT;
 		static String& IsInterned(const String& str) RTCLI_NOEXCEPT;
 
-		RTCLI_FORCEINLINE String(const Char* str)
-			:length(RTCLI_STRING_LENGTH(str)), chars(const_cast<Char*>(str))
+		RTCLI_FORCEINLINE String(const NativeChar* str)
 		{
-
+			chars = RTCLI_STRING_FROM_NATIVE(str);
+			length = RTCLI_STRING_LENGTH(chars);
 		}
 
         ///< Length of string *excluding* the trailing null (which is included in 'chars').
