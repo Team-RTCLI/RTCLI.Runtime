@@ -39,7 +39,6 @@ struct Fuck_v : RTCLI::System::ValueType, RTCLI::System::IComparable_1<Fuck_v>
     }
 };
 
-
 int main()
 {
     RTCLI::init();

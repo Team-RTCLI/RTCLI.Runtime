@@ -9,6 +9,12 @@ namespace RTCLI
 	struct TRef;
 namespace System
 {
+    struct nullref_t 
+    {
+        template <typename T>
+        operator T&() const;
+    };
+
     enum EObjectFlagBits : u32
     {
         None = 0,
@@ -28,9 +34,13 @@ namespace System
             const struct Type* t_ = nullptr, RC rc_ = 0, Flags flags_ = EObjectFlagBits::None)
             :type(t_), rc(rc_), flags(flags_)
         {}
-        RTCLI_FORCEINLINE Object(nullptr_t null)
+
+        // null
+        RTCLI_FORCEINLINE Object(const nullref_t null)
             :type(nullptr), rc(1), flags(EObjectFlagBits::Null)
         {}
+        RTCLI_FORCEINLINE Object& operator=(const nullref_t null) RTCLI_NOEXCEPT;
+
         void Constructor() RTCLI_NOEXCEPT;
         RTCLI_FORCEINLINE bool operator==(const Object& other) const RTCLI_NOEXCEPT
         {
@@ -66,7 +76,7 @@ namespace System
             std::is_base_of_v<System::Object, T>,
             "ManagedObject must be derived from System::Object!"
         );
-        Managed(nullptr_t null) RTCLI_NOEXCEPT
+        Managed(nullref_t null) RTCLI_NOEXCEPT
             :object(const_cast<System::Object*>(&RTCLI::nullObject))
         {
 
@@ -112,12 +122,34 @@ namespace System
 
 namespace RTCLI
 {
-    static const nullptr_t null = nullptr; 
+    static const System::nullref_t null;
     static const System::Object nullObject 
         = System::Object{ nullptr, 0, System::EObjectFlagBits::Null };
 
     using System::Managed;
     using System::new_object;
+
+namespace System
+{
+    RTCLI_FORCEINLINE Object& Object::operator=(const nullref_t null) RTCLI_NOEXCEPT
+    {
+        return const_cast<Object&>(RTCLI::nullObject);
+    }
+
+    template <typename T>
+    RTCLI_FORCEINLINE nullref_t::operator T&() const
+    {
+        union TypeSafetyBreaker {
+            std::reference_wrapper<const Object> nullRef;
+            // see https://stackoverflow.com/questions/38691282/use-of-union-with-reference
+            std::reference_wrapper<T> ref; 
+        };
+        TypeSafetyBreaker ptr = {.nullRef = nullObject};
+
+        // unwrap the reference
+        return ptr.ref.get();
+    }
+}
 }
 
 #include "RTCLI/Runtime/Internal/Object.inl"

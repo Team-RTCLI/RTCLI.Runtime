@@ -53,7 +53,7 @@ namespace RTCLI::System
     RTCLI_API Object& new_object(const struct Type& objectType) RTCLI_NOEXCEPT
     {
         std::cerr << "new_object unimplemented!" << std::endl;
-        return *(Object*)RTCLI::null;
+        return RTCLI::null;
     }
 
     // *******************  Exception  *************************//
