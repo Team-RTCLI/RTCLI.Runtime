@@ -6,18 +6,26 @@
 class Com : RTCLI::System::Object, RTCLI::System::IComparable_1<Com>
 {
 public:
-    RTCLI::System::Boolean CompareTo(RTCLI::TRef<Com> other) override
+    RTCLI::System::Int32 CompareTo(RTCLI::TRef<Com> other) override
     {
-        return this->val == other.Get().val;
+        if (this->val > other.Get().val)
+            return 1;
+        else if (this->val < other.Get().val)
+            return -1;
+        return 0;
     }
     int val = 0;
 };
 
 struct Fuck
 {
-    RTCLI::System::Boolean CompareTo(Fuck other) 
+    RTCLI::System::Int32 CompareTo(Fuck other)
     {
-        return this->val == other.val;
+        if (this->val > other.val)
+            return 1;
+        else if (this->val < other.val)
+            return -1;
+        return 0;
     }
     int val = 1;
 };
@@ -25,7 +33,7 @@ struct Fuck
 struct Fuck_v : RTCLI::System::ValueType, RTCLI::System::IComparable_1<Fuck_v>
 {
     Fuck ent;
-    RTCLI::System::Boolean CompareTo(RTCLI::TRef<Fuck_v> other) override
+    RTCLI::System::Int32 CompareTo(RTCLI::TRef<Fuck_v> other) override
     {
         return ent.CompareTo(other.Get().ent);
     }

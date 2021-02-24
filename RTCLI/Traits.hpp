@@ -4,6 +4,7 @@
 #include "Runtime/Single.h"
 #include "Runtime/Boolean.h"
 #include "Runtime/Object.h"
+#include "Runtime/ValueType.h"
 
 namespace RTCLI
 {

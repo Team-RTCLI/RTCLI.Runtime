@@ -61,9 +61,20 @@ namespace RTCLI
     {
         return bool(val1);
     }
+
+
+    template<class T>
+    RTCLI_IL_FUNC T& Box(const typename T::ValueType& value);
+
+    template<class T>
+    RTCLI_IL_FUNC typename T::ValueType UnBox(const System::Object& object);
+
+    template<class T>
+    RTCLI_IL_FUNC T& Castclass(System::Object& object);
 }
 
 #include "Internal/Nop.inl"
 #include "Internal/Cgt.inl"
 #include "Internal/Add.inl"
 #include "Internal/Sub.inl"
+#include "Internal/Box.inl"
