@@ -43,6 +43,14 @@ if(LIB)
     message(STATUS "Build as lib.")
 endif()
 
+# 
+set(CLANG_DISABLED_WARNINGS "-Wno-unknown-attributes")
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(
+        ${CLANG_DISABLED_WARNINGS}
+    )
+endif()
+
 if(NOT "cxx_std_11" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
     message(FATAL_ERROR "C++11 Support is required to compile RTCLI")
 endif()

@@ -7,4 +7,10 @@ if(RTCLI_LIB)
     message(STATUS "RTCLI as lib.")
 endif()
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(
+        ${CLANG_DISABLED_WARNINGS}
+    )
+endif()
+
 include("${CMAKE_CURRENT_LIST_DIR}/@RTCLI_IMPL_NAME@Targets.cmake")

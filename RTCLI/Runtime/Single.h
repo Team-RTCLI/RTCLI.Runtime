@@ -12,8 +12,7 @@ namespace RTCLI::System
         {
 
         }
-        template<typename T>
-        RTCLI_FORCEINLINE Single(T v) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE Single(f32 v) RTCLI_NOEXCEPT
             :value(v)
         {
 

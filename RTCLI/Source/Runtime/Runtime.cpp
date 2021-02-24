@@ -52,8 +52,8 @@ namespace RTCLI::System
 
     RTCLI_API Object& new_object(const struct Type& objectType) RTCLI_NOEXCEPT
     {
-        std::cerr << "new_object unimplemented!" << std::endl;
-        return *(Object*)RTCLI::null;
+        std::cerr << "new_object(const struct Type&) unimplemented!" << std::endl;
+        return RTCLI::null;
     }
 
     // *******************  Exception  *************************//
@@ -67,14 +67,28 @@ namespace RTCLI::System
     {
         std::cerr << "String::Intern unimplemented!" << std::endl;
         
-        return (String&)RTCLI::null;
+        return RTCLI::null;
+    }
+
+    RTCLI_API String& String::ToLower(void) const RTCLI_NOEXCEPT
+    {
+        std::cerr << "String::ToLower unimplemented!" << std::endl;
+
+        return RTCLI::null;
+    }
+    
+    RTCLI_API String& String::ToUpper(void) const RTCLI_NOEXCEPT
+    {
+        std::cerr << "String::ToUpper unimplemented!" << std::endl;
+
+        return RTCLI::null;
     }
 
     RTCLI_API String& String::IsInterned(const String& str) RTCLI_NOEXCEPT
     {
         std::cerr << "String::IsInterned unimplemented!" << std::endl;
 
-        return (String&)RTCLI::null;
+        return RTCLI::null;
     }
 
     RTCLI_API System::Int32 String::get_Length() const RTCLI_NOEXCEPT
