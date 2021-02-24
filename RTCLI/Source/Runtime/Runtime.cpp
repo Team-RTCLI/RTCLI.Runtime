@@ -4,6 +4,7 @@
 #include "Runtime/String.h"
 #include "RTCLI/Traits.hpp"
 #include "Runtime/TypeSystem/Type.h"
+#include <cwctype>
 
 namespace RTCLI::System
 {
@@ -72,14 +73,14 @@ namespace RTCLI::System
 
     RTCLI_API String& String::ToLower(void) const RTCLI_NOEXCEPT
     {
-        std::cerr << "String::ToLower unimplemented!" << std::endl;
-
-        return RTCLI::null;
+        String& lower = new_object<System::String>(this->chars, this->length);
+        
+        return lower;
     }
     
     RTCLI_API String& String::ToUpper(void) const RTCLI_NOEXCEPT
     {
-        std::cerr << "String::ToUpper unimplemented!" << std::endl;
+        String& upper = new_object<System::String>(this->chars, this->length);
 
         return RTCLI::null;
     }

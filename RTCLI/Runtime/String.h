@@ -14,6 +14,11 @@ namespace RTCLI::System
 			chars = RTCLI_STRING_FROM_NATIVE(str);
 			length = RTCLI_STRING_LENGTH(chars);
 		}
+		RTCLI_FORCEINLINE String(NativeChar* str, i32 strlen)
+		{
+			chars = RTCLI_STRING_FROM_NATIVE(str);
+			length = strlen;
+		}
 
 		System::Int32 get_Length() const RTCLI_NOEXCEPT;
 		System::String& ToLower(void) const RTCLI_NOEXCEPT;
