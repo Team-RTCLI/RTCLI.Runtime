@@ -74,6 +74,12 @@ namespace RTCLI
     template<class T>
     RTCLI_IL_FUNC T& Castclass(System::Object& object);
 
+    template<class T>
+    RTCLI_IL_FUNC T& Deref(T& r) { return r; }
+
+    template<class T>
+    RTCLI_IL_FUNC T& Deref(TRef<T> r) { return r.Get(); }
+
 #define RTCLI_ADDRESSOF(val) val
 
     template<class T>
