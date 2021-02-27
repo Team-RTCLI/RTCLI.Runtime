@@ -6,46 +6,46 @@ namespace RTCLI::System
     template<typename InnerT>
     struct IntT
     {
-        RTCLI_FORCEINLINE IntT() RTCLI_NOEXCEPT {}
-        RTCLI_FORCEINLINE IntT(InnerT v) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE constexpr IntT() RTCLI_NOEXCEPT {}
+        RTCLI_FORCEINLINE constexpr IntT(InnerT v) RTCLI_NOEXCEPT
             :value(v) {}
-        RTCLI_FORCEINLINE bool operator==(const InnerT other) const RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE constexpr bool operator==(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value == other;
         }
-        RTCLI_FORCEINLINE bool operator!=(const InnerT other) const RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE constexpr bool operator!=(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value != other;
         }
-        RTCLI_FORCEINLINE bool operator<(const InnerT other) const RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE constexpr bool operator<(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value < other;
         }
-        RTCLI_FORCEINLINE bool operator>(const InnerT other) const RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE constexpr bool operator>(const InnerT other) const RTCLI_NOEXCEPT
         {
             return value > other;
         }
-        IntT& operator+=(const IntT& rhs) RTCLI_NOEXCEPT 
+        constexpr IntT& operator+=(const IntT& rhs) RTCLI_NOEXCEPT
         {                           
             this->value += rhs.value;
             return *this;
         }
-        RTCLI_FORCEINLINE friend IntT operator+(IntT lhs, const IntT other) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE friend constexpr IntT operator+(IntT lhs, const IntT other) RTCLI_NOEXCEPT
         {
             lhs += other;
             return lhs;
         }
-        IntT& operator-=(const IntT& rhs) RTCLI_NOEXCEPT 
+        constexpr IntT& operator-=(const IntT& rhs) RTCLI_NOEXCEPT
         {                           
             this->value -= rhs.value;
             return *this;
         }
-        RTCLI_FORCEINLINE friend IntT operator-(IntT lhs, const IntT other) RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE friend constexpr IntT operator-(IntT lhs, const IntT other) RTCLI_NOEXCEPT
         {
             lhs -= other;
             return lhs;
         }
-        RTCLI_FORCEINLINE operator InnerT() const RTCLI_NOEXCEPT
+        RTCLI_FORCEINLINE constexpr operator InnerT() const RTCLI_NOEXCEPT
         {
             return value;
         }

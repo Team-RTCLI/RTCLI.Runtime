@@ -29,10 +29,10 @@ namespace RTCLI::System
 	template<class... Ts, class Result>
 	class Func<Result(Ts...)> : public MulticastDelegate
 	{
-		using TrampolineType = Result(*)(Object& obj, System::IntPtr function, Ts... args);
+		using TrampolineType = Result(*)(TRef<Object> obj, System::IntPtr function, Ts... args);
 		
 		template<class F>
-		Func(Object & obj, F function)
+		Func(TRef<Object> obj, F function)
 		{
 			//fast path if function type is known at compile time
 			this->object = obj;
@@ -41,31 +41,30 @@ namespace RTCLI::System
 			using U = object_type_t<F>;
 			if constexpr (!std::is_same_v<U, void>)
 			{
-				trampolinef = +[](Object& obj, System::IntPtr function, Ts&&... args)
+				trampolinef = +[](TRef<Object> obj, System::IntPtr function, Ts&&... args)
 				{
 					return reinterpret_cast<U&>(obj).*reinterpret_cast<F>(function)(std::forward<Ts>(args)...);
 				};
 			}
 			else
 			{
-				trampolinef = +[](Object& obj, System::IntPtr function, Ts&&... args)
+				trampolinef = +[](TRef<Object> obj, System::IntPtr function, Ts&&... args)
 				{
 					return reinterpret_cast<F>(function)(std::forward<Ts>(args)...);
 				};
 			}
 			trampoline = (RTCLI::IntPtr)trampolinef;
 		}
-		Func(Object& obj, RTCLI::IntPtr function)
+		Func(TRef<Object> obj, RTCLI::IntPtr function)
 		{
 			//slow path if function type is erased
 			this->object = obj;
 			this->function = function;
 			//initialize by reflection
 			/*
-			* trampolinef = +[](Object& obj, System::IntPtr function, Ts&&... args)
-			* {
-			*	Reflection::Invoke(obj, function, std::forward<Ts>(args)...);
-			* }
+			* auto FuncDesc = Reflection::GetFunction(obj, function);
+			* FuncDesc.CheckSignature<Ts..., Result>();
+			* trampoline = FuncDesc.trampoline;
 			*/
 		}
 		virtual Result Invoke(Ts&&... args)

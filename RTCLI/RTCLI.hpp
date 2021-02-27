@@ -5,6 +5,7 @@
 #include "Runtime/Single.h"
 #include "Runtime/Boolean.h"
 #include "Runtime/Array.h"
+#include "Runtime/Delegate.h"
 
 #include "Runtime/IL.h"
 
