@@ -45,6 +45,19 @@ namespace RTCLI
     template<typename T>
     static constexpr bool is_numeric_v = is_numeric<T>::value;
 
+    template<typename T>
+    struct object_type_helper { using type = void; };
+
+    template< class T, class U >
+    struct object_type_helper<T U::*> { using type = U; };
+
+    template< class T >
+    struct object_type :
+        object_type_helper<typename std::remove_cv<T>::type> {};
+
+    template<class T>
+    using object_type_t = typename object_type<T>::type;
+
 	template<typename T>
 	struct TRef
 	{

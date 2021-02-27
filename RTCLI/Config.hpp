@@ -217,6 +217,13 @@
 
 // Compiler Defines
 
+// no vtable
+#ifdef _MSC_VER
+#define RTCLI_NOVTABLE __declspec(novtable)
+#else
+#define RTCLI_NOVTABLE
+#endif
+
 // inline defs
 #ifndef RTCLI_FORCEINLINE
 #ifdef RTCLI_COMPILER_MSVC
