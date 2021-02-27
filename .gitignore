@@ -2,3 +2,4 @@
 /build
 /.vs
 /.vscode
+/System.Private.CoreLib/obj
