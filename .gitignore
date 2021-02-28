@@ -1,5 +1,5 @@
 /Solution
 /build
-/.vs
+.vs
 /.vscode
-/System.Private.CoreLib/obj
+obj
